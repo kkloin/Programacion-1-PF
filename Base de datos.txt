@@ -1,0 +1,64 @@
+drop database 
+create database gestion_infracciones1
+
+use gestion_infracciones1
+
+Create table Conductor (
+/*id_conductor int identity (1,1) primary key not null,*/
+cedula varchar (25) primary key not null,
+nombre_completo varchar (100),
+direccion varchar (80),
+tipo_licencia varchar(40),
+fecha_de_nacimiento date,
+placa varchar(25),
+)
+Insert into Conductor (cedula,nombre_completo, direccion, tipo_licencia, fecha_de_nacimiento) values('402658945', 'Elena Gutierrez', 'Ciudad Real', 'Tipo A (Todo tipo de vehiculos)', '1999-05-06')
+Insert into Conductor (cedula,nombre_completo, direccion, tipo_licencia, fecha_de_nacimiento) values('402658947', 'Jason', 'Villa mella', 'Tipo B (Vehiculos pesados)', '1999-05-06')
+
+select * from Conductor
+
+Create table vehiculo (
+/*id_vehiculo int identity (1,1) primary key not null,*/
+placa varchar(25)primary key not null,
+marca varchar(25),
+modelo varchar (25),
+color varchar (20),
+numero_chasis int,
+
+
+)
+Insert into vehiculo (placa,marca, modelo, color, numero_chasis) values('A523654', 'Honda ', 'Civic', 'Rojo', 4568)
+select * from vehiculo
+Create table AMET (
+/*id_AMET int identity (1,1) primary key not null,*/
+codigo_empleado varchar(25)primary key not null,
+nombre_completo varchar (100),
+Fecha_de_ingreso date,
+/*tipos_de_infracciones varchar (100)*/
+
+)
+
+Insert into AMET (codigo_empleado,nombre_completo, Fecha_de_ingreso) values('1125', 'Ricardo Martinez ', '1989-04-03')
+
+select * from amet
+Create table tipos_de_infracciones (
+id_infracciones int identity (1,1) primary key not null,
+descripcion_infracciones varchar (100)
+)
+Insert into tipos_de_infracciones (descripcion_infracciones) values('Obstrucción de tránsito con penalidad de RD$ 1800.00, ')
+
+select * from registro_de_infraccion
+Create table registro_de_infraccion (
+cedula varchar (25) ,
+nombre_conductor varchar (100),
+placa varchar(25),
+tipo_licencia varchar(40),
+codigo_AMET varchar(25),
+descripcion_infracciones varchar (100)
+)
+Insert into registro_de_infraccion (cedula,nombre_conductor, placa, tipo_licencia, codigo_AMET,descripcion_infracciones) values('402658945', 'Elena Gutierrez ', 'A523654','Tipo A (Todo tipo de vehiculos)', '1125', 'Obstrucción de tránsito con penalidad de RD$ 1800.00')
+
+Alter table Conductor add foreign key (placa) references vehiculo(placa)
+
+/*Alter table Conductor add foreign key (id_infracciones) references tipos_de_infracciones(placa)*/
+
